@@ -22,7 +22,15 @@ object galvan {
 	method totalDinero () {
 		return (dinero)
 	}
-	method cobrarSueldo () { dinero += sueldo }
+	method cobrarSueldo () { dinero += sueldo 
+	if (dinero >= totalDeuda) {
+			dinero -= totalDeuda
+			totalDeuda = 0			
+		} else { 
+			totalDeuda -= dinero
+			dinero = 0
+		}
+	}
 	method sueldo() { return sueldo }
 	method sueldo(nuevoValor) { sueldo = nuevoValor }
 }
@@ -54,7 +62,23 @@ object baigorria {
 	method cobrarSueldo() {
 		dinero += self.sueldo ()
 		totalCobrado += self.sueldo ()
+		
+		if (dinero >= totalDeuda) {
+			dinero -= totalDeuda
+			totalDeuda = 0			
+		} else { 
+			totalDeuda -= dinero
+			dinero = 0
+		}
 	}
+	method cobrarSueldoProfesor() {
+		var aDescontar
+		dinero += self.sueldo()
+		aDescontar = totalDeuda.min(dinero)
+		totalDeuda -= aDescontar
+		dinero -= aDescontar
+		
+		}
 	method venderEmpanada() {
 		cantidadEmpanadasVendidas += 1
 	}
